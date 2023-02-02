@@ -1,12 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import '../loadercss.css';
 
 
 
 const Form = () => {
     const [clicked,setClicked]=useState(false);
+    const [error,setError]=useState("");
     const onSubmit =e=>{
         e.preventDefault();
+        setError("");
         const file=e.target.jsonFile.files[0];
         file&&setClicked(true);
         const formData=new FormData();
@@ -25,9 +27,9 @@ const Form = () => {
             }
             else{
                 setClicked(false);
-
+                setError(data.error);
             }
-        })
+        });
     };
     return (
         <div className='text-white'>
@@ -39,7 +41,10 @@ const Form = () => {
                         <input type="file" name='jsonFile' id='file' accept='.json' />
                         <input type="submit" value="Submit" className={`btn btn-primary ${clicked&&'hidden'}`} />
                         {
-                            clicked&&<div className="lds-dual-ring"></div>
+                            !error&&clicked&&<div className="lds-dual-ring"></div>
+                        }
+                        {
+                            error&&<div className="text-error font-bold text-lg">{error}</div>
                         }
                     </form>
                 </div>
