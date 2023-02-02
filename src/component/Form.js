@@ -6,6 +6,7 @@ import '../loadercss.css';
 const Form = () => {
     const [clicked,setClicked]=useState(false);
     const [error,setError]=useState("");
+    const [success,setSuccess]=useState("");
     const onSubmit =e=>{
         e.preventDefault();
         setError("");
@@ -42,6 +43,9 @@ const Form = () => {
                         <input type="submit" value="Submit" className={`btn btn-primary ${clicked&&'hidden'}`} />
                         {
                             !error&&clicked&&<div className="lds-dual-ring"></div>
+                        }
+                        {
+                            error&&<div className="text-error font-bold text-lg">{error}</div>
                         }
                         {
                             error&&<div className="text-error font-bold text-lg">{error}</div>
