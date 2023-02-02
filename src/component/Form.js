@@ -14,7 +14,7 @@ const Form = () => {
         file&&setClicked(true);
         const formData=new FormData();
         formData.append('file',file);
-        fetch('http://localhost:5000/data',{
+        fetch('https://backend01.vercel.app/data',{
             method: 'POST',
             body: formData
         })
